@@ -69,7 +69,7 @@ const Flowchart = () => {
     const handleSaveWorkflow = async () => {
         const workflowData = { nodes, edges };
         try {
-            await axios.post('http://localhost:5000/api/save-flowchart', workflowData);
+            await axios.post('https://future-blink-backend.vercel.app/api/save-flowchart', workflowData);
             alert('Workflow saved successfully!');
         } catch (err) {
             console.error(err);
