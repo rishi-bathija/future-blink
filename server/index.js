@@ -6,7 +6,10 @@ const mongoose = require('mongoose');
 const flowchartRoutes = require('./routes/flowchart');
 require("dotenv").config();
 
-app.use(cors());
+app.use(cors(
+    { origin: ['http://localhost:3000', "https://future-blink-frontend-five.vercel.app"] }
+));
+
 app.use(bodyParser.json());
 
 mongoose.connect(process.env.EMAILFLOWDB_URL, {
