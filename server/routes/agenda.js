@@ -14,6 +14,7 @@ console.log("Agenda instance imported successfully");
 
 // Define the "send email" job
 agenda.define('send email', async (job) => {
+    console.log("inside agenda.define");
     const { email, subject, body } = job.attrs.data;
 
     try {
@@ -24,6 +25,7 @@ agenda.define('send email', async (job) => {
                 pass: process.env.MAIL_PASS,
             },
         });
+        console.log("before send mail");
 
         await transporter.sendMail({
             from: process.env.MAIL_USER,
@@ -31,6 +33,7 @@ agenda.define('send email', async (job) => {
             subject,
             text: body,
         });
+        console.log("after send mail");
 
         console.log(`Email sent to ${email}`);
     }
@@ -38,6 +41,8 @@ agenda.define('send email', async (job) => {
         console.log(error);
     }
 });
+
+console.log("before start");
 
 agenda.start();
 
