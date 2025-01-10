@@ -29,8 +29,8 @@ router.post('/save-flowchart', async (req, res) => {
     }
 })
 
-const processFlowchart = (nodes, edges) => {
-    nodes.forEach((node) => {
+const processFlowchart = async (nodes, edges) => {
+    for (const node of nodes) {
         console.log('processFlowchart function called');
         if (node.data.label.includes('Wait')) {
             // extract delay time from node
@@ -55,13 +55,21 @@ const processFlowchart = (nodes, edges) => {
                 // Schedule email after the delay
                 console.log(`Scheduling email job: Delay ${delay} minutes for node: ${nextNode.data.label}`);
 
-                agenda.schedule(`in ${delay} minutes`, 'send email', {
-                    email: 'bathijarishi@gmail.com', // Replace with real recipient email
-                    subject: 'Cold Email Subject',
-                    body: 'This is the cold email body.'
-                });
+                try {
+                    await agenda.schedule(`in ${delay} minutes`, 'send email', {
+                        email: 'bathijarishi@gmail.com', // Replace with real recipient email
+                        subject: 'Cold Email Subject',
+                        body: 'This is the cold email body.'
+                    });
+
+                    // Log all jobs currently scheduled
+                    const jobs = await agenda.jobs({});
+                    console.log('Scheduled Jobs:', jobs);
+                } catch (error) {
+                    console.log('Error scheduling email job:', error);
+                }
             }
         }
-    });
+    };
 }
 module.exports = router;
