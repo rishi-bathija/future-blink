@@ -55,7 +55,6 @@ const processFlowchart = (nodes, edges) => {
                 // Schedule email after the delay
                 console.log(`Scheduling email job: Delay ${delay} minutes for node: ${nextNode.data.label}`);
 
-                console.log('schedule',)
                 agenda.schedule(`in ${delay} minutes`, 'send email', {
                     email: 'bathijarishi@gmail.com', // Replace with real recipient email
                     subject: 'Cold Email Subject',

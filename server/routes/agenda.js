@@ -8,8 +8,8 @@ agenda.on('ready', () => {
     console.log('Agenda is ready and running.');
 });
 
-// console.log('agenda', agenda)
-// console.log("Agenda instance imported successfully");
+console.log('agenda', agenda)
+console.log("Agenda instance imported successfully");
 
 
 // Define the "send email" job
